@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suganya K — Senior Front-End Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f6f1;
+    --bg-alt:#ffffff;
+    --panel:#ffffff;
+    --text:#1b1f27;
+    --text-dim:#6b7280;
+    --accent:#0e7c86;
+    --accent-soft:rgba(14,124,134,0.10);
+    --accent-2:#b7791f;
+    --line:#dedbd0;
+
+    --code-bg:#12161f;
+    --code-bg-alt:#171c28;
+    --code-line:#272d3d;
+    --code-text:#e7e9ee;
+    --code-text-dim:#8b93a7;
+    --accent-bright:#5eead4;
+    --accent-2-bright:#f2a65a;
+
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft); color:var(--accent);}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,246,241,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-path{
+    font-family:var(--font-mono); font-size:13px; color:var(--text-dim);
+    letter-spacing:0.02em;
+  }
+  .nav-path span{color:var(--accent);}
+  .nav-links{display:flex; gap:28px; font-family:var(--font-mono); font-size:13px;}
+  .nav-links a{color:var(--text-dim); transition:color .2s;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:13px; color:var(--accent);
+    letter-spacing:0.04em; margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; width:8px; height:8px; border-radius:50%;
+    background:var(--accent); box-shadow:0 0 12px var(--accent);
+  }
+  h1{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(40px, 6vw, 64px);
+    line-height:1.05; letter-spacing:-0.02em;
+    margin-bottom:14px;
+  }
+  .hero-role{
+    font-family:var(--font-display); font-weight:500;
+    font-size:clamp(17px, 2vw, 21px);
+    color:var(--text-dim); margin-bottom:32px;
+  }
+  .hero-role em{color:var(--accent); font-style:normal;}
+
+  .interface-block{
+    background:var(--code-bg);
+    border:1px solid var(--code-line);
+    border-radius:10px;
+    padding:22px 24px;
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    line-height:1.85;
+    max-width:460px;
+    box-shadow:0 20px 40px -20px rgba(27,31,39,0.18);
+  }
+  .interface-block .kw{color:#c792ea;}
+  .interface-block .type{color:var(--accent-bright);}
+  .interface-block .str{color:var(--accent-2-bright);}
+  .interface-block .prop{color:var(--code-text-dim);}
+  .interface-block .brace{color:var(--code-text-dim);}
+
+  .hero-cta{
+    display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--font-mono); font-size:13px;
+    padding:12px 20px; border-radius:6px;
+    border:1px solid var(--line);
+    transition:all .2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    background:var(--accent); color:#ffffff; border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn-primary:hover{background:#0b6169; transform:translateY(-1px);}
+  .btn-ghost{color:var(--text); }
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* hero diagram */
+  .tree-wrap{
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .tree-wrap svg{width:100%; height:auto; max-width:420px;}
+  .tree-line{
+    stroke:#d3cfc0; stroke-width:1.5; fill:none;
+  }
+  .tree-pulse{
+    stroke:var(--accent); stroke-width:2; fill:none;
+    stroke-dasharray:6 220; stroke-dashoffset:0;
+    animation:flow 3.2s linear infinite;
+    opacity:0.9;
+  }
+  .tree-pulse.d1{animation-delay:0s;}
+  .tree-pulse.d2{animation-delay:.6s;}
+  .tree-pulse.d3{animation-delay:1.2s;}
+  .tree-pulse.d4{animation-delay:1.8s;}
+  @keyframes flow{
+    from{stroke-dashoffset:0;}
+    to{stroke-dashoffset:-226;}
+  }
+  .node{fill:var(--bg-alt); stroke:#d3cfc0; stroke-width:1.5;}
+  .node.root{fill:var(--accent); stroke:var(--accent);}
+  .node-label{
+    font-family:var(--font-mono); font-size:10.5px; fill:var(--text-dim);
+  }
+  .node-label.root-label{fill:#ffffff; font-weight:600;}
+
+  @media (prefers-reduced-motion: reduce){
+    .tree-pulse{animation:none; stroke-dasharray:none; opacity:0.5;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:72px 0; border-top:1px solid var(--line);}
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:40px;
+  }
+  .sec-tag{
+    font-family:var(--font-mono); font-size:12px; color:var(--accent);
+    background:var(--accent-soft); padding:4px 10px; border-radius:4px;
+  }
+  .sec-title{
+    font-family:var(--font-display); font-weight:600; font-size:28px; letter-spacing:-0.01em;
+  }
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- SUMMARY ---------- */
+  .readme{
+    background:var(--code-bg); border:1px solid var(--code-line); border-radius:10px;
+    padding:32px;
+    box-shadow:0 20px 40px -24px rgba(27,31,39,0.18);
+  }
+  .readme-top{
+    display:flex; align-items:center; gap:8px; margin-bottom:18px;
+    font-family:var(--font-mono); font-size:12px; color:var(--code-text-dim);
+  }
+  .dot{width:9px; height:9px; border-radius:50%;}
+  .dot.r{background:#e5636e;} .dot.y{background:#e5c76e;} .dot.g{background:#6ee5a0;}
+  .readme p{font-size:16px; color:var(--code-text); max-width:70ch;}
+
+  /* ---------- STACK ---------- */
+  .import-group{margin-bottom:26px;}
+  .import-line{
+    font-family:var(--font-mono); font-size:13px; color:var(--text-dim); margin-bottom:12px;
+  }
+  .import-line .kw{color:#7c4dbb;} .import-line .mod{color:var(--accent-2);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-family:var(--font-mono); font-size:12.5px;
+    padding:7px 13px; border-radius:20px;
+    border:1px solid var(--line); color:var(--text);
+    background:var(--bg-alt);
+    transition:border-color .2s, color .2s;
+  }
+  .chip:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:var(--line);
+  }
+  .tl-item{position:relative; margin-bottom:48px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-28px; top:6px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--accent);
+  }
+  .tl-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:6px;}
+  .tl-role{font-family:var(--font-display); font-weight:600; font-size:18px;}
+  .tl-dates{font-family:var(--font-mono); font-size:12px; color:var(--accent);}
+  .tl-company{color:var(--text-dim); font-size:14px; margin-bottom:14px;}
+  .tl-bullets{list-style:none; display:grid; gap:9px;}
+  .tl-bullets li{
+    font-size:14.5px; color:var(--text); padding-left:18px; position:relative;
+  }
+  .tl-bullets li::before{
+    content:'›'; position:absolute; left:0; color:var(--accent); font-family:var(--font-mono);
+  }
+
+  /* ---------- PROJECT ---------- */
+  .project-card{
+    display:grid; grid-template-columns:1fr 1fr; gap:0;
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:12px;
+    overflow:hidden;
+  }
+  .project-visual{
+    background:linear-gradient(160deg, #1b2130, #12161f);
+    padding:28px; display:flex; align-items:center; justify-content:center;
+    border-right:1px solid var(--line);
+  }
+  .mock-dash{width:100%; max-width:280px;}
+  .mock-row{display:flex; gap:8px; margin-bottom:8px;}
+  .mock-sidebar{width:34px; background:var(--code-bg-alt); border-radius:6px; height:150px; border:1px solid var(--code-line);}
+  .mock-main{flex:1; display:flex; flex-direction:column; gap:8px;}
+  .mock-bar{height:150px; background:var(--code-bg-alt); border:1px solid var(--code-line); border-radius:6px; display:flex; align-items:flex-end; gap:6px; padding:10px;}
+  .mock-bar i{display:block; width:14%; background:var(--accent-bright); opacity:.8; border-radius:2px 2px 0 0;}
+  .mock-bar i:nth-child(1){height:40%;}
+  .mock-bar i:nth-child(2){height:70%; background:var(--accent-2-bright);}
+  .mock-bar i:nth-child(3){height:55%;}
+  .mock-bar i:nth-child(4){height:85%; background:var(--accent-2-bright);}
+  .mock-bar i:nth-child(5){height:30%;}
+
+  .project-body{padding:32px;}
+  .project-body h3{font-family:var(--font-display); font-size:21px; margin-bottom:8px;}
+  .project-body .sub{font-family:var(--font-mono); font-size:12px; color:var(--accent); margin-bottom:16px;}
+  .project-body p{font-size:14.5px; color:var(--text-dim); margin-bottom:18px;}
+  .project-body ul{list-style:none; display:grid; gap:8px; margin-bottom:20px;}
+  .project-body li{font-size:14px; padding-left:16px; position:relative;}
+  .project-body li::before{content:'›'; position:absolute; left:0; color:var(--accent); font-family:var(--font-mono);}
+
+  @media (max-width:720px){
+    .project-card{grid-template-columns:1fr;}
+    .project-visual{border-right:none; border-bottom:1px solid var(--line);}
+  }
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+  }
+  .stat-card{
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:10px;
+    padding:26px 22px;
+  }
+  .stat-num{
+    font-family:var(--font-display); font-weight:700; font-size:34px; color:var(--accent);
+    margin-bottom:8px; letter-spacing:-0.01em;
+  }
+  .stat-card:nth-child(3n+2) .stat-num{color:var(--accent-2);}
+  .stat-label{font-size:13.5px; color:var(--text-dim); line-height:1.5;}
+  @media (max-width:720px){.stat-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:480px){.stat-grid{grid-template-columns:1fr;}}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-row{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;
+    padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .edu-row:last-child{border-bottom:none;}
+  .edu-deg{font-family:var(--font-display); font-weight:600; font-size:17px;}
+  .edu-school{color:var(--text-dim); font-size:14px; margin-top:4px;}
+  .edu-dates{font-family:var(--font-mono); font-size:12px; color:var(--accent);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:72px 0 48px; border-top:1px solid var(--line);}
+  .contact-term{
+    background:var(--code-bg); border:1px solid var(--code-line); border-radius:10px;
+    padding:28px 32px; font-family:var(--font-mono); font-size:14px;
+    max-width:640px; margin:0 auto 40px;
+    box-shadow:0 20px 40px -24px rgba(27,31,39,0.18);
+  }
+  .contact-term .line{color:var(--code-text-dim); margin-bottom:6px;}
+  .contact-term .fn{color:#c792ea;}
+  .contact-term .call{color:var(--accent-bright);}
+  .contact-links{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:18px;
+  }
+  .contact-links a{
+    font-family:var(--font-mono); font-size:13px;
+    padding:9px 16px; border:1px solid var(--code-line); border-radius:6px;
+    color:var(--code-text); transition:.2s;
+  }
+  .contact-links a:hover{border-color:var(--accent-bright); color:var(--accent-bright);}
+  .foot-note{
+    text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--text-dim);
+  }
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .tree-wrap{order:-1; margin-bottom:12px;}
+    .tree-wrap svg{max-width:280px;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-path">suganya-k <span>/</span> portfolio</div>
+    <div class="nav-links">
+      <a href="#summary">summary</a>
+      <a href="#stack">stack</a>
+      <a href="#experience">experience</a>
+      <a href="#project">project</a>
+      <a href="#achievements">achievements</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">available for senior front-end roles</div>
+      <h1>Suganya K</h1>
+      <div class="hero-role">Senior Front-End Engineer — <em>Angular Systems Architect</em></div>
+
+      <div class="interface-block">
+<span class="kw">interface</span> <span class="type">Engineer</span> <span class="brace">{</span><br>
+&nbsp;&nbsp;<span class="prop">name</span>: <span class="str">'Suganya K'</span>;<br>
+&nbsp;&nbsp;<span class="prop">role</span>: <span class="str">'Senior Front-End Developer'</span>;<br>
+&nbsp;&nbsp;<span class="prop">experience</span>: <span class="str">'11+ years'</span>;<br>
+&nbsp;&nbsp;<span class="prop">stack</span>: [<span class="str">'Angular v2–19'</span>, <span class="str">'TypeScript'</span>, <span class="str">'RxJS'</span>, <span class="str">'NgRx'</span>];<br>
+&nbsp;&nbsp;<span class="prop">basedIn</span>: <span class="str">'Chennai, India'</span>;<br>
+<span class="brace">}</span>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="mailto:sugantaj29@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/suganya-k-876796b1" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-ghost" href="tel:+918056209861">+91 80562 09861</a>
+      </div>
+    </div>
+
+    <div class="tree-wrap" aria-hidden="true">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- edges -->
+        <path class="tree-line" d="M200,50 L200,110" />
+        <path class="tree-line" d="M200,110 L90,180" />
+        <path class="tree-line" d="M200,110 L200,180" />
+        <path class="tree-line" d="M200,110 L310,180" />
+        <path class="tree-line" d="M90,180 L90,250" />
+        <path class="tree-line" d="M200,180 L200,250" />
+        <path class="tree-line" d="M310,180 L310,250" />
+
+        <path class="tree-pulse d1" d="M200,50 L200,110" />
+        <path class="tree-pulse d2" d="M200,110 L90,180" />
+        <path class="tree-pulse d3" d="M200,110 L200,180" />
+        <path class="tree-pulse d4" d="M200,110 L310,180" />
+
+        <!-- nodes -->
+        <circle class="node root" cx="200" cy="40" r="16"/>
+        <text class="node-label root-label" x="200" y="44" text-anchor="middle">NG</text>
+
+        <circle class="node" cx="200" cy="110" r="12"/>
+        <text class="node-label" x="200" y="132" text-anchor="middle">core</text>
+
+        <circle class="node" cx="90" cy="180" r="10"/>
+        <text class="node-label" x="90" y="202" text-anchor="middle">NgRx</text>
+
+        <circle class="node" cx="200" cy="180" r="10"/>
+        <text class="node-label" x="200" y="202" text-anchor="middle">RxJS</text>
+
+        <circle class="node" cx="310" cy="180" r="10"/>
+        <text class="node-label" x="310" y="202" text-anchor="middle">micro-fe</text>
+
+        <circle class="node" cx="90" cy="250" r="8"/>
+        <text class="node-label" x="90" y="270" text-anchor="middle" font-size="9.5">store</text>
+
+        <circle class="node" cx="200" cy="250" r="8"/>
+        <text class="node-label" x="200" y="270" text-anchor="middle" font-size="9.5">streams</text>
+
+        <circle class="node" cx="310" cy="250" r="8"/>
+        <text class="node-label" x="310" y="270" text-anchor="middle" font-size="9.5">2M+ users</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="summary">
+  <div class="wrap reveal">
+    <div class="sec-head"><span class="sec-tag">01</span><span class="sec-title">Summary</span></div>
+    <div class="readme">
+      <div class="readme-top"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>&nbsp;&nbsp;readme.md</div>
+      <p>Senior front-end developer with 11+ years architecting and delivering responsive, high-traffic web applications, with deep hands-on expertise in Angular (v2–v19), TypeScript, RxJS, and NgRx state management. Led a zero-downtime migration from a legacy WebLogic/Tomcat stack to a modern micro-frontend architecture serving 2M+ monthly users. Owns front-end architecture, component design, accessibility (WCAG 2.1 AA), and CI/CD delivery within Agile/Scrum teams — while mentoring engineers and integrating AI-assisted tooling to raise team velocity.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap reveal">
+    <div class="sec-head"><span class="sec-tag">02</span><span class="sec-title">Stack</span></div>
+
+    <div class="import-group">
+      <div class="import-line"><span class="kw">import</span> { Angular, TypeScript, RxJS, NgRx, MicroFrontends } <span class="kw">from</span> <span class="mod">'core'</span>;</div>
+      <div class="chip-row">
+        <span class="chip">Angular v2–v19</span><span class="chip">TypeScript</span><span class="chip">RxJS</span>
+        <span class="chip">NgRx</span><span class="chip">Micro-Frontend Architecture</span><span class="chip">Web Components</span><span class="chip">JavaScript ES6+</span>
+      </div>
+    </div>
+
+    <div class="import-group">
+      <div class="import-line"><span class="kw">import</span> { Bootstrap, TailwindCSS, Figma } <span class="kw">from</span> <span class="mod">'ui-styling'</span>;</div>
+      <div class="chip-row">
+        <span class="chip">HTML5 / CSS3 / SASS</span><span class="chip">Responsive / Mobile-First</span><span class="chip">Bootstrap</span>
+        <span class="chip">Tailwind CSS</span><span class="chip">Figma / Design Systems</span>
+      </div>
+    </div>
+
+    <div class="import-group">
+      <div class="import-line"><span class="kw">import</span> { GithubActions, Git, Contentful } <span class="kw">from</span> <span class="mod">'delivery'</span>;</div>
+      <div class="chip-row">
+        <span class="chip">GitHub Actions CI/CD</span><span class="chip">Git / GitHub</span><span class="chip">Contentful CMS</span>
+        <span class="chip">Marketo Templates</span><span class="chip">WCAG 2.1 AA Audits</span><span class="chip">Cross-Browser QA</span>
+      </div>
+    </div>
+
+    <div class="import-group" style="margin-bottom:0;">
+      <div class="import-line"><span class="kw">import</span> { Agile, Mentorship, AITooling } <span class="kw">from</span> <span class="mod">'practice'</span>;</div>
+      <div class="chip-row">
+        <span class="chip">Agile / Scrum</span><span class="chip">Jira / Confluence</span><span class="chip">Technical Mentorship</span>
+        <span class="chip">GitHub Copilot</span><span class="chip">LLM-Assisted Development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="sec-head"><span class="sec-tag">03</span><span class="sec-title">Experience</span></div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <span class="tl-role">Senior Front-End Developer</span>
+          <span class="tl-dates">Oct 2019 – Dec 2025</span>
+        </div>
+        <div class="tl-company">IDP Education · thecompleteuniversityguide.com · Chennai</div>
+        <ul class="tl-bullets">
+          <li>Owned front-end architecture for a 2M+ monthly-user platform; led the migration from legacy WebLogic/Tomcat to a micro-frontend architecture with zero downtime.</li>
+          <li>Drove Core Web Vitals work across key landing pages, lifting Lighthouse scores to 80–93% and improving SEO rankings.</li>
+          <li>Set and enforced WCAG 2.1 AA standards, leading audits and embedding accessibility into the design-to-code workflow.</li>
+          <li>Introduced AI-assisted development (GitHub Copilot) team-wide, cutting boilerplate time by ~35%.</li>
+          <li>Mentored junior developers on UI architecture and standards, reducing PR review cycles by 25%.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <span class="tl-role">Web Developer</span>
+          <span class="tl-dates">May 2017 – Oct 2019</span>
+        </div>
+        <div class="tl-company">Niyati Technologies · Client-facing web development · Chennai</div>
+        <ul class="tl-bullets">
+          <li>Built responsive, cross-browser enterprise interfaces using HTML5, CSS3, JavaScript, and jQuery.</li>
+          <li>Delivered responsive HTML email templates with dynamic scripting, cutting campaign deployment effort by 50%.</li>
+          <li>Translated UX wireframes into clean, typographically precise front-end code.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <span class="tl-role">UI Developer</span>
+          <span class="tl-dates">Aug 2014 – Apr 2017</span>
+        </div>
+        <div class="tl-company">Open Designs Interactive · Digital agency · Chennai</div>
+        <ul class="tl-bullets">
+          <li>Built interactive, responsive interfaces for multiple agency clients from design brief to production.</li>
+          <li>Created reusable CSS component libraries and style guides adopted agency-wide.</li>
+          <li>Ensured consistent cross-browser rendering across IE, Chrome, Firefox, and Safari.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap reveal">
+    <div class="sec-head"><span class="sec-tag">04</span><span class="sec-title">Featured project</span></div>
+    <div class="project-card">
+      <div class="project-visual">
+        <div class="mock-dash">
+          <div class="mock-row">
+            <div class="mock-sidebar"></div>
+            <div class="mock-main">
+              <div class="mock-bar">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <h3>Angular Expense Tracker</h3>
+        <div class="sub">SPA · Angular · NgRx · Bootstrap · Chart.js</div>
+        <p>A single-page expense tracking application with secure login, category-wise spend tracking, and interactive charts — built to demonstrate production-grade Angular/NgRx architecture patterns.</p>
+        <ul>
+          <li>Architected reusable Angular/NgRx component libraries and state-management patterns.</li>
+          <li>Implemented Router, Route Guards, Reactive Forms, Dependency Injection, and Lazy Loading.</li>
+          <li>Integrated REST APIs via HTTP Client with interceptors, JWT auth headers, and centralized error handling.</li>
+          <li>Used standalone components and Angular change-detection strategies for responsive UI updates.</li>
+          <li>Covered with Karma/TestBed unit tests — service mocks, form validation, and async test cases.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap reveal">
+    <div class="sec-head"><span class="sec-tag">05</span><span class="sec-title">Achievements</span></div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">2M+</div>
+        <div class="stat-label">monthly users served through a zero-downtime micro-frontend migration</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">80–93%</div>
+        <div class="stat-label">Lighthouse scores achieved through Core Web Vitals optimization</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">35%</div>
+        <div class="stat-label">less boilerplate time after introducing AI-assisted development</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">25%</div>
+        <div class="stat-label">faster PR review cycles through mentorship and standards work</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">30%</div>
+        <div class="stat-label">less design-handoff rework from a Figma-to-Angular component workflow</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">11+</div>
+        <div class="stat-label">years architecting and shipping production front-end systems</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap reveal">
+    <div class="sec-head"><span class="sec-tag">06</span><span class="sec-title">Education</span></div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-deg">B.E., Computer Science Engineering</div>
+        <div class="edu-school">Anna University Affiliated Institution, Chennai, India</div>
+      </div>
+      <div class="edu-dates">2009 – 2013</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-term">
+      <div class="line"><span class="fn">contact</span>.<span class="call">connect</span>(<span class="fn">'Suganya K'</span>)</div>
+      <div class="line">→ sugantaj29@gmail.com</div>
+      <div class="line">→ +91 80562 09861</div>
+      <div class="line">→ Chennai, Tamil Nadu, India</div>
+      <div class="contact-links">
+        <a href="mailto:sugantaj29@gmail.com">Send email</a>
+        <a href="https://linkedin.com/in/suganya-k-876796b1" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="tel:+918056209861">Call</a>
+      </div>
+    </div>
+    <div class="foot-note">// built for senior front-end / Angular architecture roles</div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
